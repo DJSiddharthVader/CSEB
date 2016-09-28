@@ -18,6 +18,8 @@ def rbinom(N,prob):
                 Phy += 1
     return Phy
 
+
+
 def cb_gen(S, I0, prob):
     """find the number of infected and succeptible individuals in a population over 1 generation under
     the chain binomial epidemic model given a probability of infection(prob), the initial number of
@@ -28,8 +30,11 @@ def cb_gen(S, I0, prob):
     new_S = S - new_I
     return (new_S, new_I)
 
+
+
+
 def cb_sim(S, I0, prob, nmax = 10):
-    """simulates the chain binomial epidemic model for nmax generations (10 by deafault and returns the number of
+    """simulates the chain binomial epidemic model for nmax generations (10 by deafault) and returns the number of
     infected individuals in each generation in a tuple (IG)"""
     IG = []
     IG.append(I0)
@@ -42,6 +47,9 @@ def cb_sim(S, I0, prob, nmax = 10):
         IG.append(Inew)
     return tuple(IG)
 
+
+
+
 def update_cb_dict(d,k):
     """updates a dictionary d. If key k is already a key, adds one to d[k], if not initializes d[k]"""
     #for z in (k):
@@ -51,10 +59,8 @@ def update_cb_dict(d,k):
         d[(k)] = 1
 
 
-
-
-
-
+        
+        
 def run10k():
     """ Runs 10000 simulations of the binomial epidemic model using cb_sim(5,2,0.4,10) and updates
      the dictionary EO with each simulation's infection as a key and the number of occurences as the
@@ -72,7 +78,13 @@ def run10k():
             pass
     return (E1)
 
+
+
+
 def run10kplotM2():
+    '''Runs 10000 simulations of the binomial epidemic model using cb_sim(5,2,0.4,10) for multiple infection rates (0 to 1 with a 0.05 
+    step value). creates a grap with infection probability on the x axis and the mean number of infected for the simulation of 
+    each probability'''
     Meanlist = []
     temp = 0
     z = 0

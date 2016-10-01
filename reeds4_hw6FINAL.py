@@ -3,8 +3,8 @@ import numpy.random as npr
 import matplotlib.pyplot as plt
 
 def rbinom(N,prob):
-    """takes a probability(prob) in decimal form and finds the distribution of states over N
-    random trials (the chain binomial)"""
+    """takes a probability(prob) in decimal form and finds the distribution of states (either infected or succeptible) over N
+    random trials. Returns the number of infected."""
     Phy = 0
     for x in range(N):
         bi = npr.uniform(0, 1)
@@ -34,7 +34,7 @@ def cb_gen(S, I0, prob):
 
 
 def cb_sim(S, I0, prob, nmax = 10):
-    """simulates the chain binomial epidemic model for nmax generations (10 by deafault) and returns the number of
+    """simulates the chain binomial epidemic model (cb_gen) for nmax generations (10 by deafault) and returns the number of
     infected individuals in each generation in a tuple (IG)"""
     IG = []
     IG.append(I0)
@@ -51,7 +51,7 @@ def cb_sim(S, I0, prob, nmax = 10):
 
 
 def update_cb_dict(d,k):
-    """updates a dictionary d. If key k is already a key, adds one to d[k], if not initializes d[k]"""
+    """updates a dictionary d. If key k is already a key, adds one to d[k], if not initializes d[k] = 1"""
     #for z in (k):
     if k in d:
         d[(k)] += 1
@@ -63,7 +63,7 @@ def update_cb_dict(d,k):
         
 def run10k():
     """ Runs 10000 simulations of the binomial epidemic model using cb_sim(5,2,0.4,10) and updates
-     the dictionary EO with each simulation's infection as a key and the number of occurences as the
+     the dictionary EO (using update_cb_dict) with each simulation's number of infected as a key and the number of occurences as the
      value. Then prints the most likely infection outcome (key with largest value).
     """
     E1 = {}
@@ -82,9 +82,9 @@ def run10k():
 
 
 def run10kplotM2():
-    '''Runs 10000 simulations of the binomial epidemic model using cb_sim(5,2,0.4,10) for multiple infection rates (0 to 1 with a 0.05 
-    step value). creates a grap with infection probability on the x axis and the mean number of infected for the simulation of 
-    each probability'''
+    '''Runs 10000 simulations of the binomial epidemic model using cb_sim(5,2,0.4,10) for each infection rate between
+    0 and 1 with a 0.05 step value). creates a grap with infection probability on the x axis and the mean number of
+    infected for the simulation of each probability'''
     Meanlist = []
     temp = 0
     z = 0
@@ -107,3 +107,4 @@ def run10kplotM2():
     plt.show()
     fig.savefig("1MP3Assg6.png")
 
+run10kplotM2()

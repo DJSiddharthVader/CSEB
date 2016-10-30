@@ -2,9 +2,16 @@ import numpy as np
 import numpy.random as npr
 import matplotlib.pyplot as plt
 
+''' this is an epidemic model in which a population is seperated into 2 classes, succeptible to infection and infected. Members of the 
+succeptible class can become infected, but not the reverse. The simulation (cb_sim) ends after either the succeptible population reaches 0
+or 10 generation have passed. The two main functions of the code are run10k and run1kplotM2. run10k runs the simulation 10000 times and finds 
+the course of the disease that is the most likely, that is the sequence of the number of infected in each generation that most often occurs.
+run10kplotM2 runs the simulation 10000 times for varying infection probabilities and then plots the average number of infected individuals 
+for an infection probability vs the infection probabilities.'''
+
 def rbinom(N,prob):
     """takes a probability(prob) in decimal form and finds the distribution of states (either infected or succeptible) over N
-    random trials. Returns the number of infected."""
+    random trials (N being the succeptible population). Returns the number of newly infected individuals."""
     Phy = 0
     for x in range(N):
         bi = npr.uniform(0, 1)

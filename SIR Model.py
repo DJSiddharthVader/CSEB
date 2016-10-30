@@ -89,7 +89,7 @@ def update_cb_dict(d,k):
         d[(k)] += 1
     else:
         d[(k)] = 1
-
+"""
 def run10k(s = 5, i = 1, r = 1, pi = 0.1, pr = 0.1, nmax = 10):
     """ Runs 10000 simulations of the binomial epidemic model using cb_sim(s, i, r, pi, pr, nmax) and updates
      three dictionaries, S1, I1, R1 with each simulations SG, IG and RG as a key and the number of occurences as the
@@ -115,3 +115,4 @@ def run10k(s = 5, i = 1, r = 1, pi = 0.1, pr = 0.1, nmax = 10):
                     print("Most likely outcome " + p + ":", z)
                 else:
                     pass
+"""

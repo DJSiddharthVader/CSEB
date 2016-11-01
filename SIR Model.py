@@ -76,43 +76,31 @@ def cb_sim(S0, I0, R0, probSuc, probRec, nmax = 10):
     for i in range(nmax - 1):
         Snew, Inew, Rnew = cb_gen(Snew, Inew, Rnew, probSuc, probRec)
         if Inew == 0:
+            SG.append(Snew)
+            IG.append(Inew)
+            RG.append(Rnew)
             return tuple(SG), tuple(IG), tuple(RG)
         SG.append(Snew)
         IG.append(Inew)
         RG.append(Rnew)
-    return tuple(SG), tuple(IG), tuple(RG)
+    return SG, IG, RG
 
-def update_cb_dict(d,k):
-    """updates a dictionary d. If key k is already a key, adds one to d[k], if not initializes d[k] = 1"""
-    #for z in (k):
-    if k in d:
-        d[(k)] += 1
-    else:
-        d[(k)] = 1
-"""
-def run10k(s = 5, i = 1, r = 1, pi = 0.1, pr = 0.1, nmax = 10):
-    """ Runs 10000 simulations of the binomial epidemic model using cb_sim(s, i, r, pi, pr, nmax) and updates
-     three dictionaries, S1, I1, R1 with each simulations SG, IG and RG as a key and the number of occurences as the
-     value respectively. It then prints the most likely outcomes for the epidemic for the succeptible, infected and
-     recovered populations (key with largest value).
-    """
-    S1 = {}
-    I1 = {}
-    R1 = {}
-    for x in range(10000):
-        a, b, c = cb_sim(s, i, r, pi, pr, nmax)
-        update_cb_dict(S1, a)
-        update_cb_dict(I1, b)
-        update_cb_dict(R1, c)
-    print (S1, I1, R1)
-    dicts = [S1, I1, R1]
-    prints = ["for succeptible", "for infected", "for recovered"]
-    for u in range(3):
-            i = dicts[u]
-            p = prints[u]
-            for z in i.keys():
-                if i[z] == max(i.values()):
-                    print("Most likely outcome " + p + ":", z)
-                else:
-                    pass
-"""
+
+
+def cb_sim_graph(S0 = 2200, I0 = 3, R0 = 5, probInf = 0.1, probRec = 0.1, nmax = 10):
+    '''Uses the cb_sim() function to generate data for one instance of an infection (either 10 generations or until there
+    are 0 infected people. It then plots the number of succeptibles, infected and recovered against the number of generations.
+    It also prints the Y vlaues for each populations
+    '''
+    x, y, z, = cb_sim(S0, I0, R0, probInf, probRec, nmax)
+    print("Susceptible", x,'\n',"Infected  ", y, '\n' "Recovered  ",z)
+    plt.plot( x, 'r--', y, 'g-', z, 'b:')
+    plt.axis([0,len(x),-1,S0+I0+R0])
+    plt.legend(("Succeptible", "Infected", "Recovered"))
+    plt.xlabel("Generations")
+    plt.ylabel("Populations")
+    plt.show()
+
+
+
+

@@ -49,9 +49,8 @@ def cb_gen(S0, I0, R0, probInf, probRe):
     succeptibles, infected and recovered (new_S, new_I, new_R)"""
 
     PI = 1- (1 - probInf) ** (I0)
-    PR = 1- (1 - probRe) ** (R0)
     new_S = S0 - infectionrate(S0, PI)
-    new_R = recoveryrate(I0, PR) + R0
+    new_R = recoveryrate(I0, probRe) + R0
     new_I = I0 + S0 - new_S - new_R + R0
     if new_I + new_S + new_R != S0 + I0 + R0:
         raise ValueError
